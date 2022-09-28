@@ -21,7 +21,7 @@ public class Client {
     public boolean equals(Object o) {
         if(o instanceof Client){
             Client other = (Client) o;
-            return other.getMail() == this.mail && other.getPwd() == this.pwd;
+            return other.getMail().equals(this.mail) && other.getPwd().equals(this.pwd);
         }
         return false;
     }
