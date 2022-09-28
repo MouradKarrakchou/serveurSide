@@ -2,13 +2,16 @@ import exception.InvalidCredentialsException;
 import exception.SignInFailed;
 
 import java.lang.reflect.Array;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Connection {
+public class Connection extends UnicastRemoteObject {
     ArrayList<Client> clientList;
     //
 
-    public Connection(ArrayList<Client> clientList) {
+    public Connection(int numport,ArrayList<Client> clientList) throws RemoteException {
+        super(numport);
         this.clientList = clientList;
     }
 
