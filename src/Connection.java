@@ -30,6 +30,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         Client loginClient = new Client(mail, pwd);
         try{
             for(Client client: clientList){
+                System.out.println(client);
                 if(client.equals(loginClient)){
                     System.out.println("Login successful");
                     return null;
