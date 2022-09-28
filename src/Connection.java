@@ -6,26 +6,38 @@ import java.util.ArrayList;
 
 public class Connection {
     ArrayList<Client> clientList;
-    //throws SignInFailed
+    //
 
     public Connection(ArrayList<Client> clientList) {
         this.clientList = clientList;
     }
 
-    boolean signIn (String mail, String pwd){
-
-    }
-    //(eg, if a client with this email already exists)
-    //throws InvalidCredentialsException
-    IVODService login(String mail, String pwd){
+    boolean signIn (String mail, String pwd) throws SignInFailed{
         Client loginClient = new Client(mail, pwd);
         for(Client client: clientList){
             if(client.equals(loginClient)){
-                System.out.println("Login successful");
-                return new IVODService;
+                System.out.println("Email already exist");
+                return false;
             }
         }
-        throws InvalidCredentialsException;
+        clientList.add(new Client(mail, pwd));
+        return true;
+    }
+    //
+    IVODService login(String mail, String pwd) throws InvalidCredentialsException{
+        Client loginClient = new Client(mail, pwd);
+        try{
+            for(Client client: clientList){
+                if(client.equals(loginClient)){
+                    System.out.println("Login successful");
+                    return null;
+                }
+            }
+            throw new Exception();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
     }
     //(if mail/pwd don't match)
 }
