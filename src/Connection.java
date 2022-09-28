@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Connection {
     ArrayList<Client> clientList;
-    //
 
     public Connection(ArrayList<Client> clientList) {
         this.clientList = clientList;
@@ -23,7 +22,7 @@ public class Connection {
         clientList.add(new Client(mail, pwd));
         return true;
     }
-    //
+
     IVODService login(String mail, String pwd) throws InvalidCredentialsException{
         Client loginClient = new Client(mail, pwd);
         try{
@@ -39,5 +38,4 @@ public class Connection {
         }
         return null;
     }
-    //(if mail/pwd don't match)
 }
