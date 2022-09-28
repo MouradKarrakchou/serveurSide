@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Connection extends UnicastRemoteObject implements IConnection {
     ArrayList<Client> clientList;
+    VODService vodService=new VODService(1000);
+
 
     public Connection(int numport) throws RemoteException {
         super(numport);
@@ -33,7 +35,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
                 System.out.println(client);
                 if(client.equals(loginClient)){
                     System.out.println("Login successful");
-                    return null;
+                    return vodService;
                 }
             }
             throw new Exception();
