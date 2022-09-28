@@ -6,15 +6,15 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Connection extends UnicastRemoteObject {
+public class Connection extends UnicastRemoteObject implements IConnection {
     ArrayList<Client> clientList;
 
-    public Connection(int numport,ArrayList<Client> clientList) throws RemoteException {
+    public Connection(int numport) throws RemoteException {
         super(numport);
-        this.clientList = clientList;
+        this.clientList = new ArrayList<>();
     }
 
-    boolean signIn (String mail, String pwd) throws SignInFailed{
+    public boolean signIn(String mail, String pwd) throws SignInFailed{
         Client loginClient = new Client(mail, pwd);
         for(Client client: clientList){
             if(client.equals(loginClient)){
@@ -26,7 +26,7 @@ public class Connection extends UnicastRemoteObject {
         return true;
     }
 
-    IVODService login(String mail, String pwd) throws InvalidCredentialsException{
+    public IVODService login(String mail, String pwd) throws InvalidCredentialsException{
         Client loginClient = new Client(mail, pwd);
         try{
             for(Client client: clientList){
