@@ -1,6 +1,6 @@
 import java.math.BigInteger;
 
-public class Bill {
+public class Bill implements IBill{
     String movieName;
     BigInteger outrageousPrice;
 
