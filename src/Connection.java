@@ -1,3 +1,6 @@
+import exception.InvalidCredentialsException;
+import exception.SignInFailed;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
