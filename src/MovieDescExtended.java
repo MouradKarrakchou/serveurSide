@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class MovieDescExtended extends MovieDesc implements IMovieDesc {
+public class MovieDescExtended extends MovieDesc {
     Byte[] teaser;
 
     public MovieDescExtended(String movieName, String isbn, String synopsis, Byte[] teaser) {
@@ -9,7 +9,7 @@ public class MovieDescExtended extends MovieDesc implements IMovieDesc {
     }
 
     @Override
-    public String toPrint() {
+    public String toString() {
         return
                 "movieName='" + movieName + '\'' +
                 ", isbn='" + isbn + '\'' +
