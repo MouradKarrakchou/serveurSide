@@ -28,9 +28,8 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         return true;
     }
 
-    public IVODService login(String mail, String pwd) throws InvalidCredentialsException{
+    public IVODService login(String mail, String pwd) throws Exception {
         Client loginClient = new Client(mail, pwd);
-        try{
             for(Client client: clientList){
                 System.out.println(client);
                 if(client.equals(loginClient)){
@@ -39,9 +38,5 @@ public class Connection extends UnicastRemoteObject implements IConnection {
                 }
             }
             throw new Exception();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return null;
     }
 }

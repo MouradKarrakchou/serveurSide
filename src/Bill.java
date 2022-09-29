@@ -1,11 +1,11 @@
-import java.math.BigInteger;
+import java.io.Serializable;
 
-public class Bill implements IBill{
+public class Bill implements Serializable {
     String movieName;
-    BigInteger outrageousPrice;
+    int outrageousPrice;
 
 
-    public Bill(String movieName, BigInteger outrageousPrice) {
+    public Bill(String movieName, int outrageousPrice) {
         this.movieName = movieName;
         this.outrageousPrice = outrageousPrice;
     }
