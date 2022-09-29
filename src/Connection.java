@@ -17,8 +17,6 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         try {
             System.out.println(csvManager.getClientList());
             this.clientList = csvManager.getClientList();
-            //csvManager.addClient(new Client("test", "test"));
-            //System.out.println(csvManager.getClientList());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +30,12 @@ public class Connection extends UnicastRemoteObject implements IConnection {
                 return false;
             }
         }
-        clientList.add(new Client(mail, pwd));
+        try {
+            csvManager.addClient(loginClient);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        clientList.add(loginClient);
         return true;
     }
 

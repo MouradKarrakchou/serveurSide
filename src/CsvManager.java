@@ -25,9 +25,10 @@ public class CsvManager {
     }
 
     public void addClient(Client client) throws IOException {
-        FileWriter csvWriter = new FileWriter(csvPath);
+        FileWriter csvWriter = new FileWriter(csvPath, true);
         csvWriter.append(client.getMail()+","+client.getPwd());
         csvWriter.append("\n");
+        csvWriter.close();
     }
 
 }
