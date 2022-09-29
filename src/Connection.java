@@ -1,7 +1,6 @@
-import exception.InvalidCredentialsException;
 import exception.SignInFailed;
 
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -10,10 +9,19 @@ public class Connection extends UnicastRemoteObject implements IConnection {
     ArrayList<Client> clientList;
     VODService vodService=new VODService(1000);
 
+    CsvManager csvManager = new CsvManager("clientList.csv");
+
 
     public Connection(int numport) throws RemoteException {
         super(numport);
-        this.clientList = new ArrayList<>();
+        try {
+            System.out.println(csvManager.getClientList());
+            this.clientList = csvManager.getClientList();
+            //csvManager.addClient(new Client("test", "test"));
+            //System.out.println(csvManager.getClientList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean signIn(String mail, String pwd) throws SignInFailed{
