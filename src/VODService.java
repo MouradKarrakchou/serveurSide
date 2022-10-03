@@ -1,3 +1,5 @@
+import exception.InvalidISBN;
+
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -36,7 +38,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return(movieDescList);
     }
 
-    public void filmrun(Movie movieCurrent,IClientBox box) throws RemoteException, InterruptedException {
+    public void filmRun(Movie movieCurrent, IClientBox box) throws RemoteException, InterruptedException {
         box.setMovieIsPlaying(true);
         for (byte[] tab: movieCurrent.moviebytes){
             Thread.sleep(1000);
@@ -46,7 +48,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         box.setMovieIsPlaying(false);
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws Exception {
+    public Bill playMovie(String isbn, IClientBox box) throws InvalidISBN {
         Movie moviecurrent=null;
         for (Movie movie: movieList){
             if (movie.getMovieIspn().equals(isbn)){
@@ -54,13 +56,13 @@ public class VODService extends UnicastRemoteObject implements IVODService {
             }
         }
         if (moviecurrent==null){
-            throw new Exception();
+            throw new InvalidISBN();
         }
         Movie finalMoviecurrent = moviecurrent;
         Thread t = new Thread() {
             public void run() {
                 try {
-                    filmrun(finalMoviecurrent,box);
+                    filmRun(finalMoviecurrent,box);
                 } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();
                 }
