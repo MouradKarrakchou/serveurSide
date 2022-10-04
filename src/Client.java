@@ -17,6 +17,13 @@ public class Client {
         return pwd;
     }
 
+    public boolean sameEmail(Object o){
+        if(o instanceof Client){
+            Client other = (Client) o;
+            return other.getMail().equals(this.mail);
+        }
+        return false;
+    }
     @Override
     public boolean equals(Object o) {
         if(o instanceof Client){

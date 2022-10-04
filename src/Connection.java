@@ -26,7 +26,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
     public boolean signIn(String mail, String pwd) throws SignInFailed {
         Client loginClient = new Client(mail, pwd);
         for (Client client : clientList) {
-            if (client.equals(loginClient)) {
+            if (client.sameEmail(loginClient)) {
                 throw new SignInFailed();
             }
         }
