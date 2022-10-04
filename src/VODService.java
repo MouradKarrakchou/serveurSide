@@ -17,12 +17,12 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         movieDescList=new ArrayList<>();
         movieList=new ArrayList<>();
         MovieDesc movieDesc1=new MovieDesc("Robocop1","0","Insane film1");
-        MovieDesc movieDesc2=new MovieDesc("Robocop2","1","Insane film2");
+        MovieDesc movieDesc2=new MovieDescExtended("Robocop2","1","Insane film2", new byte[][]{("blabiblo").getBytes(StandardCharsets.UTF_8), ("dazoazdoi").getBytes(StandardCharsets.UTF_8)});
         MovieDesc movieDesc3=new MovieDesc("Robocop3","2","Insane film3");
 
-        Movie movie1=new Movie(movieDesc1, new byte[][]{("blabla").getBytes(StandardCharsets.UTF_8),("bliblo").getBytes(StandardCharsets.UTF_8)},1000);
-        Movie movie2=new Movie(movieDesc2, new byte[][]{("siuuu").getBytes(StandardCharsets.UTF_8),("uuuuuuu").getBytes(StandardCharsets.UTF_8)},2000);
-        Movie movie3=new Movie(movieDesc3, new byte[][]{("oooooo").getBytes(StandardCharsets.UTF_8),("yyyyyy").getBytes(StandardCharsets.UTF_8)},3000);
+        Movie movie1=new Movie(movieDesc1, new byte[][]{("blabla").getBytes(StandardCharsets.UTF_8),("bliblo").getBytes(StandardCharsets.UTF_8),("bldzandazon").getBytes(StandardCharsets.UTF_8)},1000);
+        Movie movie2=new Movie(movieDesc2, new byte[][]{("siuuu").getBytes(StandardCharsets.UTF_8),("uuuuuuu").getBytes(StandardCharsets.UTF_8),("bldazdzadzandazon").getBytes(StandardCharsets.UTF_8)},2000);
+        Movie movie3=new Movie(movieDesc3, new byte[][]{("oooooo").getBytes(StandardCharsets.UTF_8),("yyyyyy").getBytes(StandardCharsets.UTF_8),("bldzandazdazon").getBytes(StandardCharsets.UTF_8)},3000);
 
         movieDescList.add(movieDesc1);
         movieDescList.add(movieDesc2);
