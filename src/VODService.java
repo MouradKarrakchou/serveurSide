@@ -58,7 +58,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
     }
 
     /**
-     * Find the movie by his isbn and create a thread that stream the movie
+     * Find the movie by it isbn and create a thread that stream the movie
      * @param isbn
      * @param box
      * @return
