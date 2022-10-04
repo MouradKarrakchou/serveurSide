@@ -23,6 +23,13 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         }
     }
 
+    /**
+     * Register a client
+     * @param mail
+     * @param pwd
+     * @return true if the client is correctly register, otherwise false
+     * @throws SignInFailed, when the client try to register with a mail already know
+     */
     public boolean signIn(String mail, String pwd) throws SignInFailed {
         Client loginClient = new Client(mail, pwd);
         for (Client client : clientList) {
@@ -39,6 +46,13 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         return true;
     }
 
+    /**
+     * Login the client into the Vod service
+     * @param mail
+     * @param pwd
+     * @return IVODService, that the client will use to interact with the systeme
+     * @throws InvalidCredentialsException, when the client try to login with wrong mail and password
+     */
     public IVODService login(String mail, String pwd) throws InvalidCredentialsException {
         Client loginClient = new Client(mail, pwd);
         for (Client client : clientList) {
