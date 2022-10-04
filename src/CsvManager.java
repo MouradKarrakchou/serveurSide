@@ -9,7 +9,11 @@ public class CsvManager {
         this.csvPath = csvPath;
     }
 
-    //il faut vérifier que en position 0 de la liste on ai bien un client et pas mail,pwd
+    /**
+     * Create and return a client list from the csv file
+      * @return a client list
+     * @throws IOException
+     */
     public ArrayList<Client> getClientList() throws IOException {
         ArrayList<Client> clientList = new ArrayList<>();
         BufferedReader csvReader = new BufferedReader(new FileReader(csvPath));
@@ -24,6 +28,11 @@ public class CsvManager {
         return clientList;
     }
 
+    /**
+     * Add a client to the csv file
+     * @param client
+     * @throws IOException
+     */
     public void addClient(Client client) throws IOException {
         FileWriter csvWriter = new FileWriter(csvPath, true);
         csvWriter.append(client.getMail()+","+client.getPwd());
