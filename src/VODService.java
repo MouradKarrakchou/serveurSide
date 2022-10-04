@@ -16,6 +16,8 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         super(port);
         movieDescList=new ArrayList<>();
         movieList=new ArrayList<>();
+
+        //Creation of the movie catalogue
         MovieDesc movieDesc1=new MovieDesc("Robocop1","0","Insane film1");
         MovieDesc movieDesc2=new MovieDescExtended("Robocop2","1","Insane film2", new byte[][]{("blabiblo").getBytes(StandardCharsets.UTF_8), ("dazoazdoi").getBytes(StandardCharsets.UTF_8)});
         MovieDesc movieDesc3=new MovieDesc("Robocop3","2","Insane film3");
@@ -38,6 +40,13 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return(movieDescList);
     }
 
+    /**
+     * Run the film frame by frame by sending instructions to the clientBox
+     * @param movieCurrent
+     * @param box
+     * @throws RemoteException
+     * @throws InterruptedException
+     */
     public void filmRun(Movie movieCurrent, IClientBox box) throws RemoteException, InterruptedException {
         box.setMovieIsPlaying(true);
         for (byte[] tab: movieCurrent.moviebytes){
@@ -48,6 +57,13 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         box.setMovieIsPlaying(false);
     }
 
+    /**
+     * Find the movie by it isbn and create a thread that stream the movie
+     * @param isbn
+     * @param box
+     * @return
+     * @throws InvalidISBN
+     */
     public Bill playMovie(String isbn, IClientBox box) throws InvalidISBN {
         Movie moviecurrent=null;
         for (Movie movie: movieList){
@@ -59,15 +75,13 @@ public class VODService extends UnicastRemoteObject implements IVODService {
             throw new InvalidISBN();
         }
         Movie finalMoviecurrent = moviecurrent;
-        Thread t = new Thread() {
-            public void run() {
-                try {
-                    filmRun(finalMoviecurrent,box);
-                } catch (RemoteException | InterruptedException e) {
-                    e.printStackTrace();
-                }
+        Thread t = new Thread(() -> {
+            try {
+                filmRun(finalMoviecurrent,box);
+            } catch (RemoteException | InterruptedException e) {
+                e.printStackTrace();
             }
-        };
+        });
         t.start();
         return new Bill(finalMoviecurrent.getMovieName(),finalMoviecurrent.price);
 
